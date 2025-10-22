@@ -1,16 +1,25 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import os
 
 st.set_page_config(page_title="California Housing Data", layout="wide")
 
 st.title('California Housing Data (1990) by XiyuZhou')  
 
-@st.cache_data
-def load_data():
-    data = pd.read_csv('housing.csv')  
-
-housing_data = load_data()
+# 直接尝试读取文件，如果失败则使用绝对路径
+try:
+    # 首先尝试相对路径
+    housing_data = pd.read_csv('housing.csv')
+    st.success("使用相对路径成功读取文件！")
+except FileNotFoundError:
+    try:
+        # 如果相对路径失败，尝试绝对路径
+        housing_data = pd.read_csv('/Users/uuuuuy/Desktop/Python/housing.csv/housing.csv')
+        st.success("使用绝对路径成功读取文件！")
+    except FileNotFoundError:
+        st.error("无法找到 housing.csv 文件！请确保文件在正确位置。")
+        st.stop()
 
 st.sidebar.header('More Filters')
 
