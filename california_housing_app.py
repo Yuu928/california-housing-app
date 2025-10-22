@@ -8,7 +8,7 @@ st.title('California Housing Data (1990) by XiyuZhou')
 
 @st.cache_data
 def load_data():
-    data = pd.read_csv('/Users/uuuuuy/Desktop/Python/housing.csv/housing.csv')  
+    data = pd.read_csv('housing.csv')  
 
 housing_data = load_data()
 
